@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 import ParticlesComponent from "@/components/particles";
 import { StatusBarProvider } from "@/lib/status-bar/context";
 import StatusBarContainer from "@/components/status-bar/container";
@@ -9,12 +9,12 @@ import { FFmpegProvider } from "@/lib/ffmpeg-provider";
 import SettingsForm from "@/components/ui/settings-form";
 import { SettingsProvider } from "@/lib/settings-provider";
 import { BackgroundProvider } from "@/lib/background-provider";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
     subsets: ['latin'],
     display: 'swap',
-})
+});
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.qobuz-dl.com/'), // Site URL
@@ -73,6 +73,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     </StatusBarProvider>
                     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.7/dist/ffmpeg.min.js"></script>
                 </FFmpegProvider>
+                {/* Add your script tag here */}
+                  <script type='text/javascript' src='//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js'></script>
+                <script type="text/javascript" src="//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js"></script>
             </body>
         </html>
     );
