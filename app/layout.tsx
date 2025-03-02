@@ -19,10 +19,10 @@ const inter = Inter({
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.qobuz-dl.com/'), // Site URL
     title: {
-        default: process.env.NEXT_PUBLIC_APPLICATION_NAME + " - by definitely a boy.",
+        default: process.env.NEXT_PUBLIC_APPLICATION_NAME + " - temporary instances if anyone needs",
         template: process.env.NEXT_PUBLIC_APPLICATION_NAME!
     },
-    description: "temporary instances if anyone need h",
+    description: "temporary qobuz-dl instances if anyone need ",
     openGraph: {
         images: process.env.NEXT_PUBLIC_APPLICATION_NAME!.toLowerCase() === "qobuz-dl"
             ? [{ url: '/logo/qobuz-banner.png', width: 650, height: 195, alt: 'Qobuz Logo' }]
