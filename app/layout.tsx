@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -44,6 +45,30 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    const [showOverlay, setShowOverlay] = useState(true);
+
+    useEffect(() => {
+        // Set a timeout to hide the overlay after 60 seconds
+        const timeout = setTimeout(() => {
+            setShowOverlay(true);
+        }, 60000); // 60 seconds
+
+        return () => clearTimeout(timeout); // Clean up the timeout
+    }, [showOverlay]);
+
+    const handleClick = () => {
+        // Open the link in a new tab
+        window.open("https://www.effectiveratecpm.com/hth2qe2wzk?key=077a7c4eb85b433782d1c47ff1bfacb3", "_blank");
+
+        // Hide the overlay after the first click
+        setShowOverlay(false);
+
+        // Reset the overlay after 60 seconds
+        setTimeout(() => {
+            setShowOverlay(true);
+        }, 60000);
+    };
+
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.className} antialiased`}>
@@ -67,6 +92,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                                         <Toaster />
                                         <StatusBarContainer />
                                     </div>
+
+                                    {/* Invisible overlay */}
+                                    {showOverlay && (
+                                        <div
+                                            onClick={handleClick}
+                                            className="fixed top-0 left-0 w-full h-full bg-black opacity-0 cursor-pointer z-[100]"
+                                        ></div>
+                                    )}
                                 </ThemeProvider>
                             </BackgroundProvider>
                         </SettingsProvider>
@@ -74,8 +107,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.7/dist/ffmpeg.min.js"></script>
                 </FFmpegProvider>
                 {/* Add your script tag here */}
-               <script type="text/javascript" src="//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js" crossOrigin="anonymous"></script>
-<script type="text/javascript" src="//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js" crossOrigin="anonymous"></script>
+                <script type="text/javascript" src="//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js" crossOrigin="anonymous"></script>
+                <script type="text/javascript" src="//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js" crossOrigin="anonymous"></script>
             </body>
         </html>
     );
