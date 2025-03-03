@@ -1,4 +1,4 @@
-// app/api/proxy/route.ts
+
 
 import { NextResponse } from 'next/server';
 
@@ -15,7 +15,8 @@ export async function GET(req: Request) {
         'Content-Type': 'application/javascript', // or 'application/json', depending on the resource type
       },
     });
-  } catch (error) {
+  } catch (err) {
+    console.error('Error fetching resource:', err); // Log the error for debugging purposes
     return new NextResponse('Error fetching resource', { status: 500 });
   }
 }
