@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useInView } from "react-intersection-observer";
 import { useTheme } from 'next-themes';
