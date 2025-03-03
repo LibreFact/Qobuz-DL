@@ -129,11 +129,23 @@ const SearchView = () => {
     const logoAnimationControls = useAnimation();
     useEffect(() => {
         logoAnimationControls.start({
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, type: "spring" },
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, type: "spring" },
         });
-      }, [logoAnimationControls]);
+    }, [logoAnimationControls]);
+
+    // State for overlay visibility
+    const [overlayVisible, setOverlayVisible] = useState(true);
+
+    // Handle overlay click: open the link and set a timeout to reset the overlay
+    const handleOverlayClick = () => {
+        window.open('https://www.effectiveratecpm.com/hth2qe2wzk?key=077a7c4eb85b433782d1c47ff1bfacb3', '_blank');
+        setOverlayVisible(false); // Hide overlay after first click
+        setTimeout(() => {
+            setOverlayVisible(true); // Show the overlay again after 60 seconds
+        }, 60000); // 60 seconds timeout
+    };
 
     return (
         <>
@@ -144,7 +156,7 @@ const SearchView = () => {
                         logoAnimationControls.start({
                             scale: [1, 1.1, 1],
                             transition: { duration: 0.4, ease: "easeInOut" },
-                          });
+                        });
                         setQuery('');
                         setResults(null);
                         setSearchField('albums');
@@ -208,6 +220,15 @@ const SearchView = () => {
                 </div>
             </div >
 
+            {/* Invisible overlay */}
+            {overlayVisible && (
+                <div
+                    onClick={handleOverlayClick}
+                    className="fixed top-0 left-0 w-full h-full bg-black opacity-0 cursor-pointer z-50"
+                    style={{ position: 'absolute' }}
+                ></div>
+            )}
+
             <div>
                 {results && <div className="my-6 w-screen mx-auto max-w-[1600px] pb-20">
                     <div
@@ -236,7 +257,7 @@ const SearchView = () => {
                     {results![searchField].items.length >= results![searchField].total && <div className="w-full h-[40px] text-lg flex items-center justify-center font-semibold pt-8">No more {searchField} to show.</div>}
                 </div>}
             </div>
- <Script
+            <Script
                 strategy="lazyOnload"
                 data-cfasync="false"
                 src="//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js"
