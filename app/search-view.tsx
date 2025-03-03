@@ -16,6 +16,19 @@ import { useSettings } from '@/lib/settings-provider';
 import Image from 'next/image';
 import Script from 'next/script';
 import { motion, useAnimation } from 'motion/react';
+import { CSSProperties } from 'react';
+
+// Overlay component style
+const overlayStyle: CSSProperties = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0)', // invisible but present
+    zIndex: 9999,
+};
+
 
 const SearchView = () => {
     const { resolvedTheme } = useTheme();
