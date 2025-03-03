@@ -235,6 +235,9 @@ const SearchView = () => {
                     {results![searchField].items.length >= results![searchField].total && <div className="w-full h-[40px] text-lg flex items-center justify-center font-semibold pt-8">No more {searchField} to show.</div>}
                 </div>}
             </div>
+ {/* Added script and container div here */}
+            <script async="async" data-cfasync="false" src="//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js"></script>
+            <div id="container-9892ffd32f9cb817e6496cb53572d152"></div>
         </>
     )
 }
