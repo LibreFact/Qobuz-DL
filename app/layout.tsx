@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -44,6 +45,36 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+
+    useEffect(() => {
+        // Dynamically load the ad script tags
+        const script1 = document.createElement("script");
+        script1.src = "/api/proxy?04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js";
+        script1.type = "text/javascript";
+        script1.async = true;
+        document.body.appendChild(script1);
+
+        const script2 = document.createElement("script");
+        script2.src = "/api/proxy?77/c3/48/77c3486a254ed77447696eac531872e6.js";
+        script2.type = "text/javascript";
+        script2.async = true;
+        document.body.appendChild(script2);
+
+        const script3 = document.createElement("script");
+        script3.src = "/api/proxy?9892ffd32f9cb817e6496cb53572d152/invoke.js";
+        script3.type = "text/javascript";
+        script3.async = true;
+        script3.setAttribute("data-cfasync", "false");
+        document.body.appendChild(script3);
+
+        // Cleanup the script tags when the component unmounts
+        return () => {
+            document.body.removeChild(script1);
+            document.body.removeChild(script2);
+            document.body.removeChild(script3);
+        };
+    }, []);
+
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.className} antialiased`}>
@@ -73,12 +104,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     </StatusBarProvider>
                     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.7/dist/ffmpeg.min.js"></script>
                 </FFmpegProvider>
-                {/* Add your script tag here */}
-               <script type="text/javascript" src="/api/proxy?04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js"></script>
-<script type="text/javascript" src="/api/proxy?77/c3/48/77c3486a254ed77447696eac531872e6.js"></script>
-<script async data-cfasync={false} src="/api/proxy?9892ffd32f9cb817e6496cb53572d152/invoke.js"></script>
-
-
+                {/* Don't need to manually add script tags anymore; they're loaded dynamically */}
             </body>
         </html>
     );
