@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useInView } from "react-intersection-observer";
 import { useTheme } from 'next-themes';
@@ -16,19 +16,6 @@ import { useSettings } from '@/lib/settings-provider';
 import Image from 'next/image';
 import Script from 'next/script';
 import { motion, useAnimation } from 'motion/react';
-import { CSSProperties } from 'react';
-
-// Overlay component style
-const overlayStyle: CSSProperties = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0)', // invisible but present
-    zIndex: 9999,
-};
-
 
 const SearchView = () => {
     const { resolvedTheme } = useTheme();
@@ -39,37 +26,6 @@ const SearchView = () => {
     const [searching, setSearching] = useState<boolean>(false);
     const [searchError, setSearchError] = useState<string>('');
     const { settings } = useSettings();
-
-    // Track first click
-    const [overlayClicked, setOverlayClicked] = useState(false);
-    const overlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    // Overlay visibility and click handler
-    const handleOverlayClick = () => {
-        if (!overlayClicked) {
-            window.open('https://www.effectiveratecpm.com/hth2qe2wzk?key=077a7c4eb85b433782d1c47ff1bfacb3', '_blank');
-            setOverlayClicked(true);
-            
-            // Reset the overlay after 60 seconds
-            if (overlayTimeoutRef.current) {
-                clearTimeout(overlayTimeoutRef.current);
-            }
-            overlayTimeoutRef.current = setTimeout(() => {
-                setOverlayClicked(false);
-            }, 60000);
-        }
-    };
-
-    // Overlay component style
-    const overlayStyle = {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0)', // invisible but present
-        zIndex: 9999,
-    };
 
     const filterData = [
         {
@@ -182,14 +138,6 @@ const SearchView = () => {
     return (
         <>
             <div className="space-y-4">
-                {/* Overlay */}
-                {!overlayClicked && (
-                    <div 
-                        style={overlayStyle}
-                        onClick={handleOverlayClick}
-                    />
-                )}
-
                 <motion.div
                     className="flex flex-col select-none cursor-pointer"
                     onClick={() => {
@@ -208,7 +156,10 @@ const SearchView = () => {
                     {process.env.NEXT_PUBLIC_APPLICATION_NAME!.toLowerCase() === "qobuz-dl" ? (
                         <Image src={resolvedTheme === "light" ? '/logo/qobuz-web-light.png' : '/logo/qobuz-web-dark.png'} priority={true} width={225} height={100} alt={process.env.NEXT_PUBLIC_APPLICATION_NAME!} className='w-auto mx-auto' />
                     ) : (
-                        <h1 className="text-4xl font-bold text-center">{process.env.NEXT_PUBLIC_APPLICATION_NAME}</h1>
+                        <>
+                            <h1 className="text-4xl font-bold text-center">{process.env.NEXT_PUBLIC_APPLICATION_NAME}</h1>
+                            <p className='text-md text-center font-medium text-muted-foreground'>by definitely a boy</p>
+                        </>
                     )}
                 </motion.div>
                 <div className="flex flex-col items-start justify-center">
@@ -285,7 +236,7 @@ const SearchView = () => {
                     {results![searchField].items.length >= results![searchField].total && <div className="w-full h-[40px] text-lg flex items-center justify-center font-semibold pt-8">No more {searchField} to show.</div>}
                 </div>}
             </div>
-            <Script
+ <Script
                 strategy="lazyOnload"
                 data-cfasync="false"
                 src="//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js"
