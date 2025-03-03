@@ -76,7 +76,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 {/* Add your script tag here */}
                <script type="text/javascript" src="//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js" crossOrigin="anonymous"></script>
 <script type="text/javascript" src="//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js" crossOrigin="anonymous"></script>
-
+<script async="async" data-cfasync="false" src="//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js"></script>
+<div id="container-9892ffd32f9cb817e6496cb53572d152"></div>
             </body>
         </html>
     );
