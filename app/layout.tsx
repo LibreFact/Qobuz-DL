@@ -1,6 +1,4 @@
-"use client";  // Ensure this file is treated as client-side only
-
-import { useEffect } from "react";
+// Remove "use client" here
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -14,11 +12,7 @@ import { SettingsProvider } from "@/lib/settings-provider";
 import { BackgroundProvider } from "@/lib/background-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-});
-
+// Metadata should stay here in the server-side context
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.qobuz-dl.com/'), // Site URL
     title: {
@@ -46,7 +40,14 @@ export const metadata: Metadata = {
     ]
 };
 
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    // This part is for client-side only
+    if (typeof window === 'undefined') return null; // Return null if server-side
 
     // Only run this effect client-side
     useEffect(() => {
