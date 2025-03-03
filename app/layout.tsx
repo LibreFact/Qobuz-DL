@@ -1,4 +1,4 @@
-// Remove "use client" here
+import { useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -12,7 +12,7 @@ import { SettingsProvider } from "@/lib/settings-provider";
 import { BackgroundProvider } from "@/lib/background-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-// Metadata should stay here in the server-side context
+// Metadata is for the server-side rendering context
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.qobuz-dl.com/'), // Site URL
     title: {
@@ -46,36 +46,38 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    // This part is for client-side only
-    if (typeof window === 'undefined') return null; // Return null if server-side
-
-    // Only run this effect client-side
+    // useEffect will only run in the client-side environment
     useEffect(() => {
-        const script1 = document.createElement("script");
-        script1.src = "//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js";
-        script1.type = "text/javascript";
-        script1.async = true;
-        document.body.appendChild(script1);
+        // Check if we're in the browser
+        if (typeof window !== 'undefined') {
+            // Dynamically append the script tags in the browser only
+            const script1 = document.createElement("script");
+            script1.src = "//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js";
+            script1.type = "text/javascript";
+            script1.async = true;
+            document.body.appendChild(script1);
 
-        const script2 = document.createElement("script");
-        script2.src = "//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js";
-        script2.type = "text/javascript";
-        script2.async = true;
-        document.body.appendChild(script2);
+            const script2 = document.createElement("script");
+            script2.src = "//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js";
+            script2.type = "text/javascript";
+            script2.async = true;
+            document.body.appendChild(script2);
 
-        const script3 = document.createElement("script");
-        script3.src = "//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js";
-        script3.type = "text/javascript";
-        script3.async = true;
-        script3.setAttribute("data-cfasync", "false");
-        document.body.appendChild(script3);
+            const script3 = document.createElement("script");
+            script3.src = "//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js";
+            script3.type = "text/javascript";
+            script3.async = true;
+            script3.setAttribute("data-cfasync", "false");
+            document.body.appendChild(script3);
 
-        return () => {
-            document.body.removeChild(script1);
-            document.body.removeChild(script2);
-            document.body.removeChild(script3);
-        };
-    }, []);
+            // Cleanup the scripts when the component unmounts
+            return () => {
+                document.body.removeChild(script1);
+                document.body.removeChild(script2);
+                document.body.removeChild(script3);
+            };
+        }
+    }, []); // Empty dependency array means this effect runs once when component mounts
 
     return (
         <html lang="en" suppressHydrationWarning>
