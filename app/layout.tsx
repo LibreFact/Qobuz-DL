@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -12,7 +11,11 @@ import { SettingsProvider } from "@/lib/settings-provider";
 import { BackgroundProvider } from "@/lib/background-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-// Metadata is for the server-side rendering context
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+});
+
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.qobuz-dl.com/'), // Site URL
     title: {
@@ -26,7 +29,7 @@ export const metadata: Metadata = {
             : [],
     },
     keywords: [
-        `${process.env.NEXT_PUBLIC_APPLICATION_NAME!}`,
+        ${process.env.NEXT_PUBLIC_APPLICATION_NAME!},
         "music",
         "downloader",
         "hi-res",
@@ -40,48 +43,10 @@ export const metadata: Metadata = {
     ]
 };
 
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-});
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    // useEffect will only run in the client-side environment
-    useEffect(() => {
-        // Check if we're in the browser
-        if (typeof window !== 'undefined') {
-            // Dynamically append the script tags in the browser only
-            const script1 = document.createElement("script");
-            script1.src = "//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js";
-            script1.type = "text/javascript";
-            script1.async = true;
-            document.body.appendChild(script1);
-
-            const script2 = document.createElement("script");
-            script2.src = "//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js";
-            script2.type = "text/javascript";
-            script2.async = true;
-            document.body.appendChild(script2);
-
-            const script3 = document.createElement("script");
-            script3.src = "//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js";
-            script3.type = "text/javascript";
-            script3.async = true;
-            script3.setAttribute("data-cfasync", "false");
-            document.body.appendChild(script3);
-
-            // Cleanup the scripts when the component unmounts
-            return () => {
-                document.body.removeChild(script1);
-                document.body.removeChild(script2);
-                document.body.removeChild(script3);
-            };
-        }
-    }, []); // Empty dependency array means this effect runs once when component mounts
-
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.className} antialiased`}>
+            <body className={${inter.className} antialiased}>
                 <FFmpegProvider>
                     <StatusBarProvider>
                         <SettingsProvider>
@@ -108,6 +73,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     </StatusBarProvider>
                     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.7/dist/ffmpeg.min.js"></script>
                 </FFmpegProvider>
+                {/* Add your script tag here */}
+               <script type="text/javascript" src="//pl26009661.effectiveratecpm.com/04/36/63/0436631f8d65208b0ad5eda6e309d4b5.js" crossOrigin="anonymous"></script>
+<script type="text/javascript" src="//pl26009657.effectiveratecpm.com/77/c3/48/77c3486a254ed77447696eac531872e6.js" crossOrigin="anonymous"></script>
+<script async="async" data-cfasync="false" src="//pl26017529.effectiveratecpm.com/9892ffd32f9cb817e6496cb53572d152/invoke.js"></script>
+<div id="container-9892ffd32f9cb817e6496cb53572d152"></div>
             </body>
         </html>
     );
