@@ -29,7 +29,7 @@ export const metadata: Metadata = {
             : [],
     },
     keywords: [
-        ${process.env.NEXT_PUBLIC_APPLICATION_NAME!},
+        `${process.env.NEXT_PUBLIC_APPLICATION_NAME!}`,
         "music",
         "downloader",
         "hi-res",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={${inter.className} antialiased}>
+            <body className={`${inter.className} antialiased`}>
                 <FFmpegProvider>
                     <StatusBarProvider>
                         <SettingsProvider>
