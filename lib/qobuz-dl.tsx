@@ -136,7 +136,7 @@ export function filterExplicit(results: QobuzSearchResults, explicit: boolean = 
     }
 }
 
-export async function search(query: string, limit: number = 10, offset: number = 0) {
+export async function search(query: string, limit: number = 20, offset: number = 0) {
     testForRequirements();
     const url = new URL(process.env.QOBUZ_API_BASE + "catalog/search")
     url.searchParams.append("query", query)
