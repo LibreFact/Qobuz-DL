@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
@@ -44,10 +45,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    // Ensure the redirect happens only in the client-side environment
-    if (typeof window !== "undefined") {
+    useEffect(() => {
+        
         window.location.href = "https://us.qobuz.squid.wtf/";
-    }
+    }, []); 
 
     return (
         <html lang="en" suppressHydrationWarning>
